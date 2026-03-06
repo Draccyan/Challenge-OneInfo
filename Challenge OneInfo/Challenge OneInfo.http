@@ -1,0 +1,6 @@
+@Challenge_OneInfo_HostAddress = http://localhost:5101
+
+GET {{Challenge_OneInfo_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
