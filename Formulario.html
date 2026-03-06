@@ -22,7 +22,7 @@
     flex: 1; /* el mismo ancho campos*/
 }
 
-/* estilo para el campo mail */
+/* estilo para el campo email */
 .full-width {
     flex: 1;
 }
@@ -108,8 +108,8 @@ button {
 
       <div class="form-row">
         <div class="form-group full-width">
-          <label for="mail">Email</label>
-          <input type="text" id="mail" name="mail" placeholder="Ej: usuario@correo.com"/>
+          <label for="email">Email</label>
+          <input type="text" id="email" name="email" placeholder="Ej: usuario@correo.com"/>
         </div>
       </div>
 
@@ -136,16 +136,16 @@ button {
 
     // Funcion principal de envío
     btnEnviar.addEventListener("click", async () => {
-      // 1. Obtencion de campos
+      // Obtencion de campos
       const datos = {
         nombre: document.getElementById("nombre").value.trim(),
         apellido: document.getElementById("apellido").value.trim(),
         dni: document.getElementById("dni").value.trim(),
         sexo: document.getElementById("sexo").value,
-        mail: document.getElementById("mail").value.trim(),
+        email: document.getElementById("email").value.trim(),
       };
 
-      // 2. Validaciones
+      // Validaciones nombre
       if (!datos.nombre) return errorValidacion("Ingrese el nombre", "nombre");
       if (!datos.apellido)
         return errorValidacion("Ingrese el apellido", "apellido");
@@ -158,16 +158,16 @@ button {
       // Validacion combo
       if (!datos.sexo) return errorValidacion("Seleccione el sexo", "sexo");
 
-      // Validacion mail
+      // Validacion email
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(datos.mail)) {
-        return errorValidacion("Ingrese un mail con formato válido", "mail");
+      if (!emailRegex.test(datos.email)) {
+        return errorValidacion("Ingrese un email con formato válido", "email");
       }
 
-      // 3. Envío con Fetch
+      // envio con Fetch
       try {
         const response = await fetch(
-          "https://tu-futuro-backend.com/api/usuarios",
+          "https://localhost:7074/Datos/RecibirDatos",
           {
             method: "POST",
             headers: {
@@ -179,7 +179,7 @@ button {
 
         const resultado = await response.json();
         console.log("Respuesta del back:", resultado);
-        alert("Datos enviados con exito");
+        alert(resultado.mensaje);
       } catch (error) {
         // Captura de excepcion al enviar
         console.error("Error en la peticion:", error);
